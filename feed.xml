@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://gustavoaraujo.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://gustavoaraujo.dev/" rel="alternate" type="text/html" /><updated>2021-07-07T13:44:13+00:00</updated><id>https://gustavoaraujo.dev/feed.xml</id><title type="html">Gustavo Araújo - Blog</title><subtitle>Analista de sistemas, apaixonado por tecnologia, Escrevendo sobre minha jornada como desenvolvedor: aprendizados e conquistas</subtitle><entry><title type="html">GitHub CLI: PRs, Issues e outros conceitos do GitHub direto no terminal</title><link href="https://gustavoaraujo.dev/ferramentas/terminal/cli/2021/01/10/github-cli-overview.html" rel="alternate" type="text/html" title="GitHub CLI: PRs, Issues e outros conceitos do GitHub direto no terminal" /><published>2021-01-10T13:00:00+00:00</published><updated>2021-01-10T13:00:00+00:00</updated><id>https://gustavoaraujo.dev/ferramentas/terminal/cli/2021/01/10/github-cli-overview</id><content type="html" xml:base="https://gustavoaraujo.dev/ferramentas/terminal/cli/2021/01/10/github-cli-overview.html">&lt;h3 id=&quot;o-que-é&quot;&gt;O que é?&lt;/h3&gt;
+
+&lt;p&gt;GitHub CLI  (&lt;em&gt;Command Line Interface&lt;/em&gt;), como o próprio nome sugere, é o GitHub via linha de comando. Com essa ferramenta é possível trazer &lt;em&gt;pull requests&lt;/em&gt;, &lt;em&gt;issues&lt;/em&gt; e outros conceitos do GitHub para dentro do terminal.&lt;/p&gt;
+
+&lt;p&gt;Como sugere o &lt;a href=&quot;https://github.com/cli/cli&quot;&gt;repositório oficial&lt;/a&gt;, a CLI do GitHub está disponível para repositórios hospedados em &lt;a href=&quot;http://github.com/&quot;&gt;GitHub.com&lt;/a&gt; e GitHub Enterprise Server 2.20+, e pode ser instalado em MacOS, Windows e Linux.&lt;/p&gt;
+
+&lt;h3 id=&quot;vale-a-penar-usar&quot;&gt;Vale a penar usar?&lt;/h3&gt;
+
+&lt;p&gt;É uma pergunta bastante relativa, que pode ser respondida levantando dois pontos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Você é um amante do Terminal?&lt;/li&gt;
+  &lt;li&gt;Você já usa o &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; via CLI?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Se a resposta para ambos for sim, talvez vale a pena dar uma olhada mais a fundo.&lt;/p&gt;
+
+&lt;p&gt;Com a ferramenta, você consegue abrir um &lt;em&gt;Pull Request&lt;/em&gt; pelo mesmo terminal que faz seus &lt;em&gt;commits&lt;/em&gt;, o que nos poupa bastante tempo, simples e rápido.&lt;/p&gt;
+
+&lt;h3 id=&quot;como-instalar&quot;&gt;Como instalar&lt;/h3&gt;
+
+&lt;p&gt;Como não é bem o foco aqui, vou deixar a recomendação de consultar a &lt;a href=&quot;https://github.com/cli/cli#installation&quot;&gt;própria documentação&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Após instalar, execute o seguinte comando para testar o funcionamento e já verificar todos os comandos:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nt&quot;&gt;--help&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Lembrando que, &lt;code class=&quot;highlighter-rouge&quot;&gt;gh&lt;/code&gt; é o próprio binário, não se trata de um &lt;em&gt;alias&lt;/em&gt; 🙂.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;passos-iniciais&quot;&gt;Passos iniciais&lt;/h3&gt;
+
+&lt;p&gt;O primeiro passo após instalar é autenticar com sua conta do GitHub, para isso basta executar o comando:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh auth login
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Existem duas formas de login:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Via token, que pode ser gerado no GitHub&lt;/li&gt;
+  &lt;li&gt;Login no navegador&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por questões de praticidade, recomendo a segunda opção. Após autenticado, você pode verificar o status com o comando:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh auth status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Feito isso, caso queira você já pode configurar o seu editor de texto favorito para editar as mensagens de &lt;em&gt;Pull Requests:&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh config &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;editor &amp;lt;editor&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lembrando que, caso não seja atribuído nenhum editor utilizando o comando acima, o &lt;code class=&quot;highlighter-rouge&quot;&gt;gh&lt;/code&gt; assumirá o padrão definido na variável de ambiente &lt;code class=&quot;highlighter-rouge&quot;&gt;$EDITOR&lt;/code&gt; (No MacOS e no Linux o editor padrão é o &lt;code class=&quot;highlighter-rouge&quot;&gt;Nano&lt;/code&gt;, no Windows &lt;code class=&quot;highlighter-rouge&quot;&gt;Notepad&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Mais detalhes sobre o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;gh config&lt;/code&gt; podem ser encontrados na &lt;a href=&quot;https://cli.github.com/manual/gh_config&quot;&gt;documentação oficial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;hands-on---o-que-é-possível-fazer&quot;&gt;Hands-on - O que é possível fazer?&lt;/h2&gt;
+
+&lt;p&gt;Abaixo temos algumas das coisas interessantes que essa ferramenta nos permite fazer.&lt;/p&gt;
+
+&lt;h2 id=&quot;pull-requests&quot;&gt;Pull Requests&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Abrir um &lt;em&gt;Pull Request&lt;/em&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;create
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/github-cli/pr_cut_2.gif&quot; alt=&quot;GIF exemplificando o uso do comando&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;Algum dos parâmetros interessantes que temos aqui:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Com o parâmetro &lt;code class=&quot;highlighter-rouge&quot;&gt;-B&lt;/code&gt; podemos especificar o base branch, isto é, para qual branch essas alterações serão enviadas após o merge:&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;create &lt;span class=&quot;nt&quot;&gt;-B&lt;/span&gt; main
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Com o parâmetro &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; podemos especificar que se trata de um &lt;em&gt;&lt;a href=&quot;https://docs.github.com/pt/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests#pull-requests-de-rascunho&quot;&gt;Draft Pull Request&lt;/a&gt;:&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;create &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fechar/reabrir um &lt;em&gt;Pull Request:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;close/reopen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mergear um &lt;em&gt;Pull Request:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;merge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Listar &lt;em&gt;Pull Requests:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ver o &lt;em&gt;diff&lt;/em&gt; de um &lt;em&gt;Pull Request:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;diff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Revisar um &lt;em&gt;Pull Request&lt;/em&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;review
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verificar os &lt;em&gt;status checks&lt;/em&gt; de um &lt;em&gt;Pull Request&lt;/em&gt; aberto, como o &lt;em&gt;CI&lt;/em&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;checks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verificar seu status de &lt;em&gt;Pull Requests:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/github-cli/prstatus_cut.gif&quot; alt=&quot;GIF exemplificando o uso do comando&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;issues&quot;&gt;Issues&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Criar uma &lt;em&gt;Issue:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh issue create
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/github-cli/issue_cut.gif&quot; alt=&quot;GIF exemplificando o uso do comando&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fechar/reabrir uma &lt;em&gt;Issue:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh issue close/reopen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Listar &lt;em&gt;Issues:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh issue list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ver uma &lt;em&gt;Issue:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh issue view
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verificar seu status de &lt;em&gt;Issues:&lt;/em&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gh issue status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/github-cli/issue_status_cut.gif&quot; alt=&quot;GIF exemplificando o uso do comando&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;considerações-finais&quot;&gt;Considerações finais&lt;/h3&gt;
+
+&lt;p&gt;Com certeza é uma ferramenta sensacional, que, se bem usada nos poupa bastante tempo.&lt;/p&gt;
+
+&lt;p&gt;Caso tenham dúvidas, sintam-se a vontade para me contatar via &lt;a href=&quot;http://twitter.com/garaujodev&quot;&gt;Twitter&lt;/a&gt; 😉&lt;/p&gt;</content><author><name></name></author><category term="ferramentas" /><category term="terminal" /><category term="cli" /><summary type="html">O que é?</summary></entry><entry><title type="html">Code Review como ferramenta de onboarding</title><link href="https://gustavoaraujo.dev/code-review/2020/07/11/code-review-como-ferramenta-de-onboarding.html" rel="alternate" type="text/html" title="Code Review como ferramenta de onboarding" /><published>2020-07-11T20:11:14+00:00</published><updated>2020-07-11T20:11:14+00:00</updated><id>https://gustavoaraujo.dev/code-review/2020/07/11/code-review-como-ferramenta-de-onboarding</id><content type="html" xml:base="https://gustavoaraujo.dev/code-review/2020/07/11/code-review-como-ferramenta-de-onboarding.html">&lt;p&gt;O processo de onboarding sempre é uma etapa difícil para desenvolvedores e empresas.
+Para o desenvolvedor, é um momento de conhecer pessoas novas, outra cultura, práticas e
+se adequar a arquitetura utilizada. Para a empresa, é um momento de integrar alguém a equipe,
+contextualizá-lo sobre como as coisas funcionam, compartilhar aspectos culturais.
+É nesse momento que buscamos nos alinhar com o time.&lt;/p&gt;
+
+&lt;p&gt;Entrando como desenvolvedor na &lt;a href=&quot;https://sourcelevel.io&quot;&gt;SourceLevel&lt;/a&gt;, não foi diferente.
+Em um primeiro momento, percebi que teria bastante dificuldade, pois a empresa nesse momento
+já adotava uma cultura que eu ainda não tinha vivenciado pelos lugares onde passei.
+Por ser uma startup com um produto voltado à qualidade de código e aprimoramento contínuo de
+equipes, faz mais que sentido ela adotar boas práticas internas, tanto de desenvolvimento quantos
+culturais (inclusive esse foi o motivo de eu me candidatar para a vaga).&lt;/p&gt;
+
+&lt;p&gt;Eu já havia desenvolvido aplicações em Rails (&lt;a href=&quot;https://sourcelevel.io&quot;&gt;SourceLevel&lt;/a&gt; usa Ruby como linguagem principal),
+porém cada aplicação Rails tem suas particularidades. Mesmo recebendo acompanhamento de alguém que
+já está familiarizado com o código nesse processo de onboarding, a melhor forma de você se
+contextualizar com os padrões e costumes praticados pelo time é lendo o código. Ele é o resultado final.
+De nada adiantam várias reuniões internas para ajustar questões culturais e técnicas, se no
+final das contas isso não é transcrito para o código. Portanto, ele sempre vai ser sua melhor referência.&lt;/p&gt;
+
+&lt;p&gt;Quando preciso mexer em uma base de código que não conheço, vou explorando os
+arquivos - abrindo cada um - e lendo, procurando compreender o contexto de cada classe, e como
+o código foi escrito. Mas essa é uma prática que pode ser acelerada se você analisar as discussões
+que geraram tal código, as melhorias sugeridas, bem como o código era anteriormente, em outras
+palavras, como ele evoluiu com o passar dos tempos.&lt;/p&gt;
+
+&lt;p&gt;Quando o produto ainda se tratava de uma ferramenta interna da extinta &lt;a href=&quot;https://computerworld.com.br/2020/01/07/nubank-anuncia-compra-da-plataformatec-para-reforcar-time-de-software/&quot;&gt;Plataformatec&lt;/a&gt;, e ainda
+chamado Ebert, os desenvolvedores já utilizavam boas práticas. Eram bastante alinhados em questões
+culturais e faziam revisão de código, mesmo com uma equipe pequena. Muitos consideram como algo
+desnecessário para equipes pequenas, mas no meu onboarding foi fundamental, pois eu tinha a disposição
+todo um histórico de discussões e alterações, o que permitiu me contextualizar melhor com as
+metodologias usadas, o porquê de cada mudança, e qual o contexto em que ela se aplicava.&lt;/p&gt;
+
+&lt;p&gt;Então fui abrindo todos os Pull Requests antigos, analisando cada mudança, olhando o diff, vendo a
+evolução do código, qual a motivação, qual a nomenclatura usada nas branches. Nessas discussões
+relacionadas à melhoria de código, consegui aprender bastante sobre a forma como o código atual é
+estruturado, quais padrões deveria seguir, as mudanças de arquiteturas, e com base nesse histórico, saber
+como deveria escrever o código hoje. Estava tudo ali, devidamente registrado. Cada mudança tinha uma
+explicação da motivação, e qual era a solução proposta. Isso foi fundamental para mim, e acelerou bastante
+o meu processo de onboarding, que inclusive foi notado por todos.&lt;/p&gt;
+
+&lt;p&gt;Foi uma atividade bem proveitosa, pois consegui até mesmo aprender algumas coisas novas, o que me
+possibilitou me sentir à vontade no time, sugerir mudanças, discutir soluções e melhorias, sem medo de
+errar, sem medo de ser julgado.&lt;/p&gt;
+
+&lt;p&gt;Quando comecei a contribuir com código, percebi que sempre tinha por ali pessoas interessadas em me
+ensinar e a aprender, as revisões nos meus Pull Requests eram sempre proveitosas.
+Tínhamos (ainda temos na verdade) diversas discussões, que sempre acrescentavam bastante à qualidade do
+código que eu escrevo.&lt;/p&gt;
+
+&lt;p&gt;Quando era minha vez de revisar o Pull Request dos outros desenvolvedores, com mais familiaridade
+com o código e com mais tempo de estrada, eu sempre me sentia retraído, achava que eu não tinha
+muito a acrescentar, mas isso foi mudando conforme algumas de minhas sugestões estavam sendo
+aceitas e apreciadas. Portanto, independente se você é um desenvolvedor sênior, pleno ou junior,
+o processo de revisão de código é sempre enriquecedor, para todos. Como diz a velha frase do matemático
+e filósofo Blaise Pascal:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Ninguém é tão sábio que não tenha algo pra aprender e nem tão tolo que não tenha algo pra ensinar”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Hoje, consigo navegar no código e contribuir com clareza, me sinto à vontade para solicitar e ceder revisões, e sei o quão produtiva é a revisão de código em um processo de onboarding. Certamente incluiria essa prática nos próximos onboardings que eu participar e recomendo que todos façam o mesmo.&lt;/p&gt;</content><author><name></name></author><category term="code-review" /><summary type="html">O processo de onboarding sempre é uma etapa difícil para desenvolvedores e empresas. Para o desenvolvedor, é um momento de conhecer pessoas novas, outra cultura, práticas e se adequar a arquitetura utilizada. Para a empresa, é um momento de integrar alguém a equipe, contextualizá-lo sobre como as coisas funcionam, compartilhar aspectos culturais. É nesse momento que buscamos nos alinhar com o time.</summary></entry></feed>

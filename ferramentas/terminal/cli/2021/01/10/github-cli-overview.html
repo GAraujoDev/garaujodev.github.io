@@ -1,0 +1,180 @@
+<h3 id="o-que-é">O que é?</h3>
+
+<p>GitHub CLI  (<em>Command Line Interface</em>), como o próprio nome sugere, é o GitHub via linha de comando. Com essa ferramenta é possível trazer <em>pull requests</em>, <em>issues</em> e outros conceitos do GitHub para dentro do terminal.</p>
+
+<p>Como sugere o <a href="https://github.com/cli/cli">repositório oficial</a>, a CLI do GitHub está disponível para repositórios hospedados em <a href="http://github.com/">GitHub.com</a> e GitHub Enterprise Server 2.20+, e pode ser instalado em MacOS, Windows e Linux.</p>
+
+<h3 id="vale-a-penar-usar">Vale a penar usar?</h3>
+
+<p>É uma pergunta bastante relativa, que pode ser respondida levantando dois pontos:</p>
+
+<ul>
+  <li>Você é um amante do Terminal?</li>
+  <li>Você já usa o <code class="highlighter-rouge">git</code> via CLI?</li>
+</ul>
+
+<p>Se a resposta para ambos for sim, talvez vale a pena dar uma olhada mais a fundo.</p>
+
+<p>Com a ferramenta, você consegue abrir um <em>Pull Request</em> pelo mesmo terminal que faz seus <em>commits</em>, o que nos poupa bastante tempo, simples e rápido.</p>
+
+<h3 id="como-instalar">Como instalar</h3>
+
+<p>Como não é bem o foco aqui, vou deixar a recomendação de consultar a <a href="https://github.com/cli/cli#installation">própria documentação</a>.</p>
+
+<p>Após instalar, execute o seguinte comando para testar o funcionamento e já verificar todos os comandos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gh <span class="nt">--help</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>Lembrando que, <code class="highlighter-rouge">gh</code> é o próprio binário, não se trata de um <em>alias</em> 🙂.</strong></li>
+</ul>
+
+<h3 id="passos-iniciais">Passos iniciais</h3>
+
+<p>O primeiro passo após instalar é autenticar com sua conta do GitHub, para isso basta executar o comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gh auth login
+</code></pre></div></div>
+
+<p>Existem duas formas de login:</p>
+
+<ul>
+  <li>Via token, que pode ser gerado no GitHub</li>
+  <li>Login no navegador</li>
+</ul>
+
+<p>Por questões de praticidade, recomendo a segunda opção. Após autenticado, você pode verificar o status com o comando:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gh auth status
+</code></pre></div></div>
+
+<p>Feito isso, caso queira você já pode configurar o seu editor de texto favorito para editar as mensagens de <em>Pull Requests:</em></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gh config <span class="nb">set </span>editor &lt;editor&gt;
+</code></pre></div></div>
+
+<p>Lembrando que, caso não seja atribuído nenhum editor utilizando o comando acima, o <code class="highlighter-rouge">gh</code> assumirá o padrão definido na variável de ambiente <code class="highlighter-rouge">$EDITOR</code> (No MacOS e no Linux o editor padrão é o <code class="highlighter-rouge">Nano</code>, no Windows <code class="highlighter-rouge">Notepad</code>).</p>
+
+<p>Mais detalhes sobre o comando <code class="highlighter-rouge">gh config</code> podem ser encontrados na <a href="https://cli.github.com/manual/gh_config">documentação oficial</a>.</p>
+
+<h2 id="hands-on---o-que-é-possível-fazer">Hands-on - O que é possível fazer?</h2>
+
+<p>Abaixo temos algumas das coisas interessantes que essa ferramenta nos permite fazer.</p>
+
+<h2 id="pull-requests">Pull Requests</h2>
+
+<ul>
+  <li>
+    <p>Abrir um <em>Pull Request</em>:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>create
+</code></pre></div>    </div>
+
+    <p><img src="/assets/github-cli/pr_cut_2.gif" alt="GIF exemplificando o uso do comando" /></p>
+
+    <p>Algum dos parâmetros interessantes que temos aqui:</p>
+
+    <ul>
+      <li>Com o parâmetro <code class="highlighter-rouge">-B</code> podemos especificar o base branch, isto é, para qual branch essas alterações serão enviadas após o merge:</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>create <span class="nt">-B</span> main
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Com o parâmetro <code class="highlighter-rouge">-d</code> podemos especificar que se trata de um <em><a href="https://docs.github.com/pt/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests#pull-requests-de-rascunho">Draft Pull Request</a>:</em></li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>create <span class="nt">-d</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Fechar/reabrir um <em>Pull Request:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>close/reopen
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Mergear um <em>Pull Request:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>merge
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Listar <em>Pull Requests:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>list
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ver o <em>diff</em> de um <em>Pull Request:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>diff
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Revisar um <em>Pull Request</em>:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>review
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verificar os <em>status checks</em> de um <em>Pull Request</em> aberto, como o <em>CI</em>:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>checks
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verificar seu status de <em>Pull Requests:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh <span class="nb">pr </span>status
+</code></pre></div>    </div>
+
+    <p><img src="/assets/github-cli/prstatus_cut.gif" alt="GIF exemplificando o uso do comando" /></p>
+  </li>
+</ul>
+
+<h2 id="issues">Issues</h2>
+
+<ul>
+  <li>
+    <p>Criar uma <em>Issue:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh issue create
+</code></pre></div>    </div>
+
+    <p><img src="/assets/github-cli/issue_cut.gif" alt="GIF exemplificando o uso do comando" /></p>
+  </li>
+  <li>
+    <p>Fechar/reabrir uma <em>Issue:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh issue close/reopen
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Listar <em>Issues:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh issue list
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ver uma <em>Issue:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh issue view
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verificar seu status de <em>Issues:</em></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>gh issue status
+</code></pre></div>    </div>
+
+    <p><img src="/assets/github-cli/issue_status_cut.gif" alt="GIF exemplificando o uso do comando" /></p>
+  </li>
+</ul>
+
+<h3 id="considerações-finais">Considerações finais</h3>
+
+<p>Com certeza é uma ferramenta sensacional, que, se bem usada nos poupa bastante tempo.</p>
+
+<p>Caso tenham dúvidas, sintam-se a vontade para me contatar via <a href="http://twitter.com/garaujodev">Twitter</a> 😉</p>
